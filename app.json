@@ -1,5 +1,8 @@
 {
   "expo": {
+    "plugins": [
+    
+  ],
     "name": "ProjectY",
     "slug": "ProjectY",
     "version": "1.0.0",
