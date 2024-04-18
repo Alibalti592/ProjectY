@@ -5,25 +5,31 @@ import { Ionicons } from "@expo/vector-icons";
 function Profile({ navigation }) {
   return (
     <View style={styles.container}>
+      {/* Person Icon and Details */}
       <View style={styles.userInfo}>
-        <View
-          style={{
-            flexDirection: "column",
-            alignItems: "flex-end",
-          }}
-        >
-          <Text style={styles.username}>Ali</Text>
+        {/* Person Icon */}
+        <View style={styles.personIcon}>
+          <Ionicons name="person-circle-outline" size={100} color="#007AFF" />
+        </View>
+
+        {/* Person Details */}
+        <View style={styles.detailsContainer}>
+          <Text style={styles.username}>أحمد حامد</Text>
           <Text style={styles.phone}>24163133</Text>
         </View>
-        <TouchableOpacity
-          style={styles.setupButton}
-          onPress={() => {
-            navigation.navigate("EditProfile");
-          }}
-        >
-          <Text style={styles.setupButtonText}>إعداد الملف الشخصي</Text>
-        </TouchableOpacity>
       </View>
+
+      {/* Setup Profile Button */}
+      <TouchableOpacity
+        style={styles.setupButton}
+        onPress={() => {
+          navigation.navigate("EditProfile");
+        }}
+      >
+        <Text style={styles.setupButtonText}>إعداد الملف الشخصي</Text>
+      </TouchableOpacity>
+
+      {/* Bottom Actions */}
       <View style={styles.actions}>
         <TouchableOpacity style={styles.action}>
           <Ionicons name="log-out-outline" size={30} color="black" />
@@ -43,34 +49,42 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#f5f5f5",
     padding: 20,
-    justifyContent: "space-between", // Ensure space between elements
   },
   userInfo: {
+    flexDirection: "row",
     backgroundColor: "#fff",
     padding: 20,
     borderRadius: 10,
+    alignItems: "center",
+  },
+  personIcon: {
+    marginRight: 20,
+  },
+  detailsContainer: {
+    flex: 1,
   },
   username: {
     fontSize: 24,
     fontWeight: "bold",
-    marginBottom: 10,
+    marginBottom: 5,
   },
   phone: {
-    fontSize: 16,
+    fontSize: 18,
     color: "#666",
-    marginBottom: 20,
   },
   setupButton: {
     backgroundColor: "black",
-    padding: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
     borderRadius: 5,
     alignItems: "center",
+    marginBottom: 20,
   },
   setupButtonText: {
     color: "#fff",
     fontSize: 16,
   },
-  bottomActions: {
+  actions: {
     backgroundColor: "#fff",
     borderRadius: 10,
   },

@@ -97,7 +97,7 @@ const PhoneInput = () => {
           <TouchableOpacity
             style={{
               backgroundColor: "#D9D9D9",
-              width: 70,
+              width: 80,
               height: 40,
               marginHorizontal: 5,
               marginVertical: 10,

@@ -1,7 +1,12 @@
 import React from "react";
 import { View } from "react-native";
 import UserForm from "./UserForm";
-function Login({ onLogin }) {
+
+function Login({ navigation }) {
+  const handlePress = () => {
+    navigation.navigate("OTPVerification");
+  };
+
   return (
     <View className="flex flex-col h-full relative">
       <View className="flex h-full">
@@ -11,7 +16,7 @@ function Login({ onLogin }) {
 
       <View className="absolute top-1/3 w-full ">
         <View className="mx-auto">
-          <UserForm onPress={onLogin} />
+          <UserForm onPress={handlePress} />
         </View>
       </View>
     </View>

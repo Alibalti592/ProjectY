@@ -1,14 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, View, Text, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import * as ImagePicker from "expo-image-picker";
 import { avocats } from "../../modals/listAvocats";
 
 function Profile({ navigation }) {
+  // State variables
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  // Function to handle image selection
+  const handleImageSelection = async () => {
+    const permissionResult =
+      await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (permissionResult.granted === false) {
+      alert("Permission to access camera roll is required!");
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 4],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setSelectedImage(result.uri);
+    }
+  };
+
   return (
     <View style={styles.container}>
       {/* Cover Image */}
       <Image
-        source={avocats[1].userImg}
+        source={selectedImage ? { uri: selectedImage } : avocats[1].userImg}
         resizeMode="cover"
         style={styles.coverImage}
       />
@@ -17,11 +43,18 @@ function Profile({ navigation }) {
       <View style={styles.userInfoContainer}>
         {/* Profile Image */}
         <View style={styles.profileImageContainer}>
-          <Image
-            source={avocats[1].userImg}
-            resizeMode="cover"
-            style={styles.profileImage}
-          />
+          <TouchableOpacity onPress={handleImageSelection}>
+            <Image
+              source={
+                selectedImage ? { uri: selectedImage } : avocats[1].userImg
+              }
+              resizeMode="cover"
+              style={styles.profileImage}
+            />
+            <View style={styles.cameraIconContainer}>
+              <Ionicons name="camera" size={24} color="#FFFFFF" />
+            </View>
+          </TouchableOpacity>
         </View>
 
         {/* User Details */}
@@ -80,6 +113,14 @@ const styles = StyleSheet.create({
     height: 100,
     width: 100,
     borderRadius: 50,
+  },
+  cameraIconContainer: {
+    position: "absolute",
+    bottom: 0,
+    right: 0,
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
+    padding: 8,
+    borderRadius: 20,
   },
   userInfo: {
     flex: 1,

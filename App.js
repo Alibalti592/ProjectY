@@ -6,6 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Ionicons } from "@expo/vector-icons";
 import HomeScreen from "./screens/HomeScreen";
 import AvocatDetail from "./screens/AvocatDetail";
+import CreateProfile from "./screens/Avocat/CreateProfile";
 import Profile from "./screens/Profile";
 import MessagesScreen from "./screens/MessagesScreen";
 import LoginScreen from "./screens/Login";
@@ -14,6 +15,7 @@ import EditProfile from "./screens/EditProfile";
 import AvocatProfile from "./screens/Avocat/AvocatProfile";
 import AvocatMessenger from "./screens/Avocat/AvocatMessenger";
 import EditProfileAvocat from "./screens/Avocat/EditProfileAvocat";
+import OTPVerification from "./screens/OTPVerification";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -131,15 +133,29 @@ const MainNavigator = () => (
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
-
   return (
     <>
       <StatusBar barStyle="dark-content" backgroundColor="black" />
       <NavigationContainer>
-        {isLoggedIn ? <MainNavigator /> : <LoginScreen onLogin={handleLogin} />}
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="AvocatTabs"
+            component={MainNavigator}
+            options={{
+              headerShown: false,
+            }}
+          />
+
+          <Stack.Screen name="OTPVerification" component={OTPVerification} />
+          <Stack.Screen name="CreateProfile" component={CreateProfile} />
+        </Stack.Navigator>
       </NavigationContainer>
     </>
   );
