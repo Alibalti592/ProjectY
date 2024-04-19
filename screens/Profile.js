@@ -1,15 +1,19 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useFonts } from "expo-font";
 
 function Profile({ navigation }) {
+  const [fontsLoaded] = useFonts({
+    "Roboto-Black": require("../assets/Fonts/Roboto-Black.ttf"),
+  });
   return (
     <View style={styles.container}>
       {/* Person Icon and Details */}
       <View style={styles.userInfo}>
         {/* Person Icon */}
         <View style={styles.personIcon}>
-          <Ionicons name="person-circle-outline" size={100} color="#007AFF" />
+          <Ionicons name="person-circle-outline" size={100} color="black" />
         </View>
 
         {/* Person Details */}
@@ -69,8 +73,10 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   phone: {
+    fontFamily: "Roboto-Black",
     fontSize: 18,
     color: "#666",
+    textAlign: "right",
   },
   setupButton: {
     backgroundColor: "black",
@@ -85,6 +91,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   actions: {
+    marginVertical: 200,
     backgroundColor: "#fff",
     borderRadius: 10,
   },

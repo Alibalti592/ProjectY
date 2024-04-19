@@ -57,7 +57,7 @@ const ChatScreen = ({ navigation, route }) => {
                 : styles.otherMessage,
             ]}
           >
-            <Text>{message.text}</Text>
+            <Text style={styles.messageText}>{message.text}</Text>
           </View>
         ))}
       </ScrollView>
@@ -97,6 +97,10 @@ const styles = StyleSheet.create({
   otherMessage: {
     alignSelf: "flex-start",
     backgroundColor: "#E5E5EA",
+  },
+  messageText: {
+    fontSize: 16,
+    color: "#333",
   },
   inputContainer: {
     flexDirection: "row",

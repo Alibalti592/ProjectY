@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StatusBar, TouchableOpacity, Button } from "react-native";
-import OTPInput from "../modals/OTPInput";
+import OTPInput from "../Componants/OTPInput";
 
 const OTPVerification = ({ navigation }) => {
   const handleVerifyOTP = () => {

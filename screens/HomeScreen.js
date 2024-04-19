@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import MapView, { Marker, Callout } from "react-native-maps";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { getAddress } from "../modals/util/location";
+import { getAddress } from "../Componants/util/location";
 import * as Location from "expo-location";
-import { avocats } from "../modals/listAvocats";
+import { avocats } from "../Componants/listAvocats";
 import { Ionicons } from "@expo/vector-icons";
 import lawyer from "../assets/lawyer.png";
 

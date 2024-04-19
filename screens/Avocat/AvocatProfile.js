@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, View, Text, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
-import { avocats } from "../../modals/listAvocats";
+import { avocats } from "../../Componants/listAvocats";
 
 function Profile({ navigation }) {
   // State variables

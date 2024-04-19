@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { TextInput, View, Text, TouchableOpacity, Image } from "react-native";
 import { NativeWindStyleSheet } from "nativewind";
-import PhoneInput from "../modals/PhoneInput";
+import PhoneInput from "../Componants/PhoneInput";
 function UserForm({ onPress }) {
   return (
     <View className="form ">

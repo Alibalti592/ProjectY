@@ -1,6 +1,12 @@
 {
   "expo": {
     "plugins": [
+      [
+        "expo-font",
+        {
+          "fonts": ["../assets/Fonts/Roboto-Black.ttf"]
+        }
+      ]
     
   ],
     "name": "ProjectY",
