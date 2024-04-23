@@ -4,7 +4,7 @@ import OTPInput from "../Componants/OTPInput";
 
 const OTPVerification = ({ navigation }) => {
   const handleVerifyOTP = () => {
-    navigation.navigate("CreateProfile");
+    navigation.navigate("إنشاء ملف");
   };
 
   return (

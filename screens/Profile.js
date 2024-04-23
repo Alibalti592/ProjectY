@@ -20,18 +20,17 @@ function Profile({ navigation }) {
         <View style={styles.detailsContainer}>
           <Text style={styles.username}>أحمد حامد</Text>
           <Text style={styles.phone}>24163133</Text>
+          {/* Setup Profile Button */}
+          <TouchableOpacity
+            style={styles.setupButton}
+            onPress={() => {
+              navigation.navigate("تعديل الملف الشخصي");
+            }}
+          >
+            <Text style={styles.setupButtonText}>تعديل الملف الشخصي</Text>
+          </TouchableOpacity>
         </View>
       </View>
-
-      {/* Setup Profile Button */}
-      <TouchableOpacity
-        style={styles.setupButton}
-        onPress={() => {
-          navigation.navigate("EditProfile");
-        }}
-      >
-        <Text style={styles.setupButtonText}>إعداد الملف الشخصي</Text>
-      </TouchableOpacity>
 
       {/* Bottom Actions */}
       <View style={styles.actions}>
@@ -60,6 +59,7 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 10,
     alignItems: "center",
+    marginBottom: 20,
   },
   personIcon: {
     marginRight: 20,
@@ -81,19 +81,19 @@ const styles = StyleSheet.create({
   setupButton: {
     backgroundColor: "black",
     paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingHorizontal: 30,
     borderRadius: 5,
     alignItems: "center",
-    marginBottom: 20,
+    marginTop: 10,
   },
   setupButtonText: {
     color: "#fff",
     fontSize: 16,
   },
   actions: {
-    marginVertical: 200,
     backgroundColor: "#fff",
     borderRadius: 10,
+    marginVertical: 300,
   },
   action: {
     flexDirection: "row",

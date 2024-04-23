@@ -54,7 +54,7 @@ const MessagesScreen = ({ navigation }) => {
   const renderItem = ({ item }) => (
     <TouchableOpacity
       style={styles.messageContainer}
-      onPress={() => navigation.navigate("Chat", { userName: item.name })}
+      onPress={() => navigation.navigate("الدردشة", { userName: item.name })}
     >
       <Image source={item.userImg} style={styles.userImg} />
       <View style={styles.messageInfo}>

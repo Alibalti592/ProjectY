@@ -4,7 +4,7 @@ import UserForm from "./UserForm";
 
 function Login({ navigation }) {
   const handlePress = () => {
-    navigation.navigate("OTPVerification");
+    navigation.navigate("التحقق من OTP");
   };
 
   return (

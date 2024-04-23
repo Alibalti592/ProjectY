@@ -122,6 +122,8 @@ const EditProfile = ({ navigation }) => {
                 onChangeText={(value) => setPassword(value)}
                 editable={true}
                 secureTextEntry={true}
+                textAlign="right"
+                autoCapitalize="none"
               />
             </View>
           </View>

@@ -18,7 +18,6 @@ const CreateProfile = ({ navigation }) => {
   const [specialty, setSpecialty] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
 
-  // Function to handle image selection
   const handleImageSelection = async () => {
     const permissionResult =
       await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -157,7 +156,7 @@ const CreateProfile = ({ navigation }) => {
             backgroundColor: "black",
             marginTop: 20,
           }}
-          onPress={() => navigation.navigate("AvocatTabs")}
+          onPress={() => navigation.navigate("شاشات الاستشاري")}
         >
           <Text style={{ color: "#FFFFFF", fontWeight: "bold" }}>
             حفظ التغييرات

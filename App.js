@@ -16,6 +16,7 @@ import AvocatProfile from "./screens/Avocat/AvocatProfile";
 import AvocatMessenger from "./screens/Avocat/AvocatMessenger";
 import EditProfileAvocat from "./screens/Avocat/EditProfileAvocat";
 import OTPVerification from "./screens/OTPVerification";
+import { useFonts } from "expo-font";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -77,18 +78,18 @@ const HomeStackScreen = () => (
 const ProfileStackScreen = () => (
   <Stack.Navigator>
     <Stack.Screen
-      name="Profilee"
+      name="1الملف"
       component={Profile}
       options={{ headerShown: false }}
     />
-    <Stack.Screen name="EditProfile" component={EditProfile} />
+    <Stack.Screen name="تعديل الملف الشخصي" component={EditProfile} />
   </Stack.Navigator>
 );
 
 const MessagesStackScreen = () => (
   <Stack.Navigator>
-    <Stack.Screen name="Messenger" component={MessagesScreen} />
-    <Stack.Screen name="Chat" component={ChatScreen} />
+    <Stack.Screen name="المراسل" component={MessagesScreen} />
+    <Stack.Screen name="الدردشة" component={ChatScreen} />
   </Stack.Navigator>
 );
 
@@ -132,6 +133,13 @@ const MainNavigator = () => (
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [fontsLoaded] = useFonts({
+    "Roboto-Black": require("./assets/Fonts/Roboto-Black.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
 
   return (
     <>
@@ -139,22 +147,22 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
-            name="Login"
+            name="تسجيل الدخول"
             component={LoginScreen}
             options={{
               headerShown: false,
             }}
           />
           <Stack.Screen
-            name="AvocatTabs"
+            name="شاشات الاستشاري"
             component={MainNavigator}
             options={{
               headerShown: false,
             }}
           />
 
-          <Stack.Screen name="OTPVerification" component={OTPVerification} />
-          <Stack.Screen name="CreateProfile" component={CreateProfile} />
+          <Stack.Screen name="التحقق من OTP" component={OTPVerification} />
+          <Stack.Screen name="إنشاء ملف" component={CreateProfile} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

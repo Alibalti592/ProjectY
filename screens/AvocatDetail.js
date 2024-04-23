@@ -5,7 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 function AvocatDetail({ route, navigation }) {
   const avocat = route.params.Avocat;
   const sendHandler = () => {
-    navigation.navigate("Chat", { avocatName: avocat.avocatName });
+    navigation.navigate("الدردشة", { avocatName: avocat.avocatName });
   };
 
   useEffect(() => {
