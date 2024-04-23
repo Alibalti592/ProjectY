@@ -13,29 +13,22 @@ function AvocatDetail({ route, navigation }) {
       title: avocat.avocatName,
     });
   }, [navigation, avocat.avocatName]);
+
   return (
     <View style={styles.container}>
       <View style={styles.circle}>
         <Ionicons name="person" size={80} color="black" />
       </View>
-      <View className="bg-white  p-2  w-full flex-3 mt-2 ">
-        <Text className=" font-Roboto text-xl"> {avocat.avocatName}</Text>
-        <Text>{avocat.specialty}</Text>
-        <Text>{avocat.address}</Text>
-        <Text>{avocat.phone}</Text>
-      </View>
-      <TouchableOpacity
-        className=" m-4 bg-black   w-full  mx-1"
-        onPress={() => {
-          navigation.navigate("Chat");
-        }}
-      >
-        <Text
-          className="text-white  text-center font-Roboto text-xl w-full"
-          onPress={sendHandler}
-        >
-          أرسل رسال{" "}
+      <View style={styles.details}>
+        <Text style={[styles.name, { width: "100%" }]}>
+          {avocat.avocatName}
         </Text>
+        <Text style={[styles.info, { width: "100%" }]}>{avocat.specialty}</Text>
+        <Text style={[styles.info, { width: "100%" }]}>{avocat.address}</Text>
+        <Text style={[styles.info, { width: "100%" }]}>{avocat.phone}</Text>
+      </View>
+      <TouchableOpacity style={styles.button} onPress={sendHandler}>
+        <Text style={styles.buttonText}>أرسل رسالة</Text>
       </TouchableOpacity>
     </View>
   );
@@ -45,7 +38,8 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     justifyContent: "center",
-    margin: 20,
+    marginHorizontal: 20,
+    marginTop: 50,
   },
   circle: {
     width: 150,
@@ -55,5 +49,36 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  details: {
+    backgroundColor: "#fff",
+    padding: 20,
+    marginTop: 20,
+    width: "100%",
+    alignItems: "right",
+  },
+  name: {
+    fontSize: 24,
+    fontWeight: "bold",
+    width: "100%",
+  },
+  info: {
+    marginBottom: 10,
+    textAlign: "right",
+    width: "100%",
+  },
+  button: {
+    backgroundColor: "black",
+    borderRadius: 20,
+    padding: 10,
+    width: "100%",
+    alignItems: "center",
+    marginTop: 20,
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 20,
+    fontFamily: "Roboto",
+  },
 });
+
 export default AvocatDetail;

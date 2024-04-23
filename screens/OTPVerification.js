@@ -40,7 +40,13 @@ const OTPVerification = ({ navigation }) => {
           </Text>
         </TouchableOpacity>
       </View>
-      <Button color={"black"} title="موافق" onPress={handleVerifyOTP} />
+      <TouchableOpacity
+        style={{ padding: 8, borderRadius: 10 }}
+        className=" m-4 bg-black"
+        onPress={handleVerifyOTP}
+      >
+        <Text className="text-white  text-center  text-xl">موافق</Text>
+      </TouchableOpacity>
     </View>
   );
 };

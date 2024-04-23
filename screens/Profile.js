@@ -21,16 +21,16 @@ function Profile({ navigation }) {
           <Text style={styles.username}>أحمد حامد</Text>
           <Text style={styles.phone}>24163133</Text>
           {/* Setup Profile Button */}
-          <TouchableOpacity
-            style={styles.setupButton}
-            onPress={() => {
-              navigation.navigate("تعديل الملف الشخصي");
-            }}
-          >
-            <Text style={styles.setupButtonText}>تعديل الملف الشخصي</Text>
-          </TouchableOpacity>
         </View>
       </View>
+      <TouchableOpacity
+        style={styles.setupButton}
+        onPress={() => {
+          navigation.navigate("تعديل الملف الشخصي");
+        }}
+      >
+        <Text style={styles.setupButtonText}>تعديل الملف الشخصي</Text>
+      </TouchableOpacity>
 
       {/* Bottom Actions */}
       <View style={styles.actions}>

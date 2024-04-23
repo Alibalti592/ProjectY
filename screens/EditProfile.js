@@ -144,7 +144,7 @@ const EditProfile = ({ navigation }) => {
             borderRadius: 6,
             alignItems: "center",
             justifyContent: "center",
-            backgroundColor: "#007AFF",
+            backgroundColor: "#000000",
             marginTop: 20,
           }}
           onPress={() => console.log("Save Changes pressed")}

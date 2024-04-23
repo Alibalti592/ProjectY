@@ -1,8 +1,15 @@
 import React from "react";
 import { View } from "react-native";
 import UserForm from "./UserForm";
-
+import { useFonts } from "expo-font";
 function Login({ navigation }) {
+  const [fontsLoaded] = useFonts({
+    "Roboto-Black": require("../assets/Fonts/Roboto-Black.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
   const handlePress = () => {
     navigation.navigate("التحقق من OTP");
   };
