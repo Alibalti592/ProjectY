@@ -1,47 +1,34 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
+import ActionButton from "../../components/ActionButton";
+import CustomButton from "../../components/CustomButton";
+import UserInfo from "../../components/UserInfo";
 
 function Profile({ navigation }) {
   const [fontsLoaded] = useFonts({
-    "Roboto-Black": require("../assets/Fonts/Roboto-Black.ttf"),
+    "Roboto-Black": require("../../assets/Fonts/Roboto-Black.ttf"),
   });
   return (
     <View style={styles.container}>
-      {/* Person Icon and Details */}
-      <View style={styles.userInfo}>
-        {/* Person Icon */}
-        <View style={styles.personIcon}>
-          <Ionicons name="person-circle-outline" size={100} color="black" />
-        </View>
-
-        {/* Person Details */}
-        <View style={styles.detailsContainer}>
-          <Text style={styles.username}>أحمد حامد</Text>
-          <Text style={styles.phone}>24163133</Text>
-          {/* Setup Profile Button */}
-        </View>
-      </View>
-      <TouchableOpacity
+      <UserInfo username="أحمد حامد" phone="24163133" />
+      <CustomButton
+        onPress={() => navigation.navigate("Edit Profile")}
+        text="تعديل الملف الشخصي"
         style={styles.setupButton}
-        onPress={() => {
-          navigation.navigate("تعديل الملف الشخصي");
-        }}
-      >
-        <Text style={styles.setupButtonText}>تعديل الملف الشخصي</Text>
-      </TouchableOpacity>
-
-      {/* Bottom Actions */}
+      />
       <View style={styles.actions}>
-        <TouchableOpacity style={styles.action}>
-          <Ionicons name="log-out-outline" size={30} color="black" />
-          <Text style={styles.actionText}>تسجيل الخروج</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.action}>
-          <Ionicons name="trash-outline" size={30} color="black" />
-          <Text style={styles.actionText}>حذف الحساب</Text>
-        </TouchableOpacity>
+        <ActionButton
+          iconName="log-out-outline"
+          text="تسجيل الخروج"
+          style={styles.action}
+        />
+        <ActionButton
+          iconName="trash-outline"
+          text="حذف الحساب"
+          style={styles.action}
+        />
       </View>
     </View>
   );

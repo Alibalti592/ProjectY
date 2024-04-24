@@ -11,7 +11,7 @@ function Login({ navigation }) {
     return null;
   }
   const handlePress = () => {
-    navigation.navigate("التحقق من OTP");
+    navigation.navigate("OTP Verification");
   };
 
   return (
@@ -21,7 +21,7 @@ function Login({ navigation }) {
         <View className="flex-1 bg-white" />
       </View>
 
-      <View className="absolute top-1/3 w-full ">
+      <View className="absolute top-1/3 w-full">
         <View className="mx-auto">
           <UserForm onPress={handlePress} />
         </View>

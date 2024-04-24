@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, View, Text, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
-import { avocats } from "../../Componants/listAvocats";
+import { avocats } from "../../components/listAvocats";
 
 function Profile({ navigation }) {
   // State variables
@@ -58,32 +58,32 @@ function Profile({ navigation }) {
         </View>
 
         {/* User Details */}
-        <View style={styles.userInfo}>
-          <Text style={styles.username}>أحمد حامد</Text>
-          <Text style={styles.specialty}>القانون العام</Text>
-        </View>
+        <UserInfo
+          username="أحمد حامد"
+          phone="24163133"
+          style={styles.userInfo}
+        />
       </View>
 
       {/* Setup Profile Button */}
-      <TouchableOpacity
+      <CustomButton
+        onPress={() => navigation.navigate("تعديل الملف الشخصي")}
+        text="تعديل الملف الشخصي"
         style={styles.setupButton}
-        onPress={() => {
-          navigation.navigate("EditProfileAvocat");
-        }}
-      >
-        <Text style={styles.setupButtonText}>إعداد الملف الشخصي</Text>
-      </TouchableOpacity>
+      />
 
       {/* Bottom Actions */}
       <View style={styles.bottomActions}>
-        <TouchableOpacity style={styles.action}>
-          <Ionicons name="log-out-outline" size={30} color="black" />
-          <Text style={styles.actionText}>تسجيل الخروج</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.action}>
-          <Ionicons name="trash-outline" size={30} color="black" />
-          <Text style={styles.actionText}>حذف الحساب</Text>
-        </TouchableOpacity>
+        <ActionButton
+          iconName="log-out-outline"
+          text="تسجيل الخروج"
+          style={styles.action}
+        />
+        <ActionButton
+          iconName="trash-outline"
+          text="حذف الحساب"
+          style={styles.action}
+        />
       </View>
     </View>
   );

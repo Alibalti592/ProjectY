@@ -1,54 +1,111 @@
 import React from "react";
-import { View, Text, StatusBar, TouchableOpacity, Button } from "react-native";
-import OTPInput from "../Componants/OTPInput";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+} from "react-native";
+import OTPInput from "../components/OTPInput";
+import { SafeAreaView } from "react-native-safe-area-context";
+import CustomButton from "../components/CustomButton";
 
 const OTPVerification = ({ navigation }) => {
   const handleVerifyOTP = () => {
-    navigation.navigate("إنشاء ملف");
+    navigation.navigate("Create Profile");
   };
 
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: "white",
-        paddingHorizontal: 20,
-        justifyContent: "center",
-      }}
-    >
-      <StatusBar hidden />
-      <View style={{ alignItems: "center" }}>
-        <Text
-          style={{
-            marginVertical: 12,
-            fontSize: 18,
-            fontWeight: "bold",
-            textAlign: "center",
-          }}
-        >
-          أدخل رمز التحقق
-        </Text>
-        <Text style={{ marginBottom: 10, textAlign: "center" }}>
-          نحن نكتشف تلقائياً الرسائل القصيرة المرسلة إلى رقم هاتفك المحمول
-        </Text>
-      </View>
-      <View style={{ alignItems: "center", marginVertical: 20 }}>
-        <OTPInput numberOfInputs={6} />
-        <TouchableOpacity style={{ marginTop: 50 }}>
-          <Text style={{ fontWeight: "bold" }}>
-            لم تتلقَ الرمز؟ إعادة إرسال الرمز
-          </Text>
-        </TouchableOpacity>
-      </View>
-      <TouchableOpacity
-        style={{ padding: 8, borderRadius: 10 }}
-        className=" m-4 bg-black"
-        onPress={handleVerifyOTP}
+    <SafeAreaView style={styles.container}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS == "ios" ? "padding" : ""}
+        style={styles.keyboardAvoidingContainer}
       >
-        <Text className="text-white  text-center  text-xl">موافق</Text>
-      </TouchableOpacity>
-    </View>
+        <View style={styles.contentContainer}>
+          <Text style={styles.title}>تحقق من رقم الهاتف</Text>
+          <Text style={styles.subtitle}>
+            أدخل رمزًا مكونًا من 4 أرقام تلقيته على هاتفك
+          </Text>
+          <Text style={styles.phoneNumber}>+ 300***********32</Text>
+
+          <OTPInput numberOfInputs={4} />
+
+          <CustomButton
+            onPress={handleVerifyOTP}
+            text={"تأكيد"} // Corrected prop name
+            style={[styles.confirmButton, { width: 300 }]} // Added width
+          />
+
+          <View style={styles.editPhoneNumberContainer}>
+            <Text style={styles.editPhoneNumberText}>رقم الهاتف خاطئ؟ </Text>
+            <TouchableOpacity
+              onPress={() => console.log("الانتقال إلى شاشة إدخال رقم الهاتف")}
+            >
+              <Text style={styles.editButtonText}>تعديل</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+  },
+  keyboardAvoidingContainer: {
+    flex: 1,
+  },
+  contentContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 20,
+  },
+  title: {
+    fontSize: 25,
+    color: "#111",
+    marginBottom: 20,
+  },
+  subtitle: {
+    fontSize: 15,
+    color: "#111",
+    textAlign: "center",
+    marginBottom: 20,
+  },
+  phoneNumber: {
+    fontSize: 15,
+    color: "#111",
+    marginBottom: 20,
+  },
+  confirmButton: {
+    marginTop: 20,
+    backgroundColor: "#000000",
+    paddingVertical: 12,
+    paddingHorizontal: 30,
+    borderRadius: 8,
+    color: "white",
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  editPhoneNumberContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 20,
+  },
+  editPhoneNumberText: {
+    fontSize: 15,
+    color: "#342342",
+  },
+  editButtonText: {
+    fontSize: 15,
+    color: "#342342",
+    fontWeight: "bold",
+    marginLeft: 5,
+  },
+});
 
 export default OTPVerification;

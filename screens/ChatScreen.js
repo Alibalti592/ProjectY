@@ -12,20 +12,19 @@ const ChatScreen = ({ navigation, route }) => {
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState("");
   const scrollViewRef = useRef();
+  const avocat = route.params.avocat;
 
   useEffect(() => {
     scrollToBottom();
-    // Set dynamic title
-    if (route.params && route.params.avocatName) {
-      navigation.setOptions({
-        title: route.params.avocatName, // Set your dynamic title here
-        headerTitleStyle: { fontSize: 20, fontWeight: "bold", color: "#333" }, // Add your custom styling here
-      });
-    }
+
+    navigation.setOptions({
+      title: avocat,
+      headerTitleStyle: { fontSize: 20, fontWeight: "bold", color: "#333" }, // Add your custom styling here
+    });
   }, [messages, navigation, route.params]);
 
   const sendMessage = () => {
-    if (inputMessage.trim() === "") return; // Don't send empty messages
+    if (inputMessage.trim() === "") return;
 
     const newMessage = {
       id: messages.length + 1,
@@ -68,7 +67,7 @@ const ChatScreen = ({ navigation, route }) => {
           value={inputMessage}
           onChangeText={setInputMessage}
         />
-        <Button title="Send" onPress={sendMessage} />
+        <Button color={"black"} title="Send" onPress={sendMessage} />
       </View>
     </View>
   );

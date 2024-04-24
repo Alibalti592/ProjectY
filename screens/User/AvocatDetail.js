@@ -1,18 +1,43 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import CustomButton from "../../components/CustomButton";
+import { avocats } from "../../components/listAvocats";
 
 function AvocatDetail({ route, navigation }) {
-  const avocat = route.params.Avocat;
+  const [avocat, setAvocat] = useState(null);
+
+  const id = route.params.id;
   const sendHandler = () => {
-    navigation.navigate("الدردشة", { avocatName: avocat.avocatName });
+    console.log("pressed");
+    if (avocat) {
+      navigation.navigate("MessagesStack", {
+        screen: "Chat",
+        params: { avocat: avocat.name },
+      });
+    }
   };
 
   useEffect(() => {
-    navigation.setOptions({
-      title: avocat.avocatName,
-    });
-  }, [navigation, avocat.avocatName]);
+    const fetchedAvocat = avocats.find((avocat) => avocat.id === id);
+    setAvocat(fetchedAvocat);
+  }, [id]);
+
+  useEffect(() => {
+    if (avocat) {
+      navigation.setOptions({
+        title: avocat.name,
+      });
+    }
+  }, [navigation, avocat]);
+
+  if (!avocat) {
+    return (
+      <View style={styles.container}>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -20,16 +45,19 @@ function AvocatDetail({ route, navigation }) {
         <Ionicons name="person" size={80} color="black" />
       </View>
       <View style={styles.details}>
-        <Text style={[styles.name, { width: "100%" }]}>
-          {avocat.avocatName}
-        </Text>
+        <Text style={[styles.name, { width: "100%" }]}>{avocat.name}</Text>
         <Text style={[styles.info, { width: "100%" }]}>{avocat.specialty}</Text>
         <Text style={[styles.info, { width: "100%" }]}>{avocat.address}</Text>
-        <Text style={[styles.info, { width: "100%" }]}>{avocat.phone}</Text>
+        <Text style={[styles.info, { width: "100%" }]}>
+          {avocat.phoneNumber}
+        </Text>
       </View>
-      <TouchableOpacity style={styles.button} onPress={sendHandler}>
-        <Text style={styles.buttonText}>أرسل رسالة</Text>
-      </TouchableOpacity>
+
+      <CustomButton
+        text={"أرسل رسالة"}
+        onPress={sendHandler}
+        style={styles.button}
+      />
     </View>
   );
 }
@@ -73,8 +101,6 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     marginTop: 20,
-  },
-  buttonText: {
     color: "white",
     fontSize: 20,
     fontFamily: "Roboto",

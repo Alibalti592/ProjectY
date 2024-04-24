@@ -10,6 +10,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
+import CustomButton from "../components/CustomButton";
 
 const CreateProfile = ({ navigation }) => {
   const [name, setName] = useState("");
@@ -156,7 +157,7 @@ const CreateProfile = ({ navigation }) => {
             backgroundColor: "black",
             marginTop: 20,
           }}
-          onPress={() => navigation.navigate("شاشات الاستشاري")}
+          onPress={() => navigation.navigate("Main")}
         >
           <Text style={{ color: "#FFFFFF", fontWeight: "bold" }}>
             حفظ التغييرات
