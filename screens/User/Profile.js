@@ -5,11 +5,36 @@ import { useFonts } from "expo-font";
 import ActionButton from "../../components/ActionButton";
 import CustomButton from "../../components/CustomButton";
 import UserInfo from "../../components/UserInfo";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useDispatch } from "react-redux";
+import { deleteUser } from "../../redux/AuthSlice";
+import { logout } from "../../redux/AuthSlice";
 
 function Profile({ navigation }) {
+  const dispatch = useDispatch();
   const [fontsLoaded] = useFonts({
     "Roboto-Black": require("../../assets/Fonts/Roboto-Black.ttf"),
   });
+  const handleDelete = async () => {
+    try {
+      await AsyncStorage.removeItem("token");
+      await AsyncStorage.removeItem("isProfileSetup");
+
+      dispatch(deleteUser());
+      navigation.navigate("Auth", { screen: "Login" });
+    } catch (error) {
+      console.error("Error deleting user:", error);
+    }
+  };
+  const handleLogOut = async () => {
+    try {
+      await AsyncStorage.removeItem("token");
+      dispatch(logout());
+      navigation.navigate("Auth", { screen: "Login" });
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
   return (
     <View style={styles.container}>
       <UserInfo username="أحمد حامد" phone="24163133" />
@@ -20,11 +45,12 @@ function Profile({ navigation }) {
       />
       <View style={styles.actions}>
         <ActionButton
+          onPress={handleLogOut}
           iconName="log-out-outline"
           text="تسجيل الخروج"
-          style={styles.action}
         />
         <ActionButton
+          onPress={handleDelete}
           iconName="trash-outline"
           text="حذف الحساب"
           style={styles.action}
@@ -78,16 +104,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   actions: {
+    position: "absolute",
     backgroundColor: "#fff",
     borderRadius: 10,
-    marginVertical: 300,
+    bottom: 8,
+    left: 20, // Adjust left position
+    right: 20, // Adjust right position
   },
   action: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
+    borderBottomWidth: 0,
   },
   actionText: {
     marginLeft: 10,

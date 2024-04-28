@@ -15,7 +15,7 @@ const Stack = createStackNavigator();
 const ProfileStack = () => (
   <Stack.Navigator>
     <Stack.Screen
-      name="Profilee"
+      name="Profile"
       component={AvocatProfile}
       options={{
         tabBarIcon: ({ color, size }) => (
@@ -24,14 +24,29 @@ const ProfileStack = () => (
         headerShown: false,
       }}
     />
-    <Stack.Screen name="EditProfileAvocat" component={EditProfileAvocat} />
+    <Stack.Screen
+      name="EditProfileAvocat"
+      component={EditProfileAvocat}
+      options={{ title: "تعديل الملف الشخصي" }}
+    />
   </Stack.Navigator>
 );
 
 const AvocatTabs = () => (
   <Tab.Navigator>
     <Tab.Screen
-      name="الملف"
+      name="Messenger"
+      component={AvocatMessenger}
+      options={{
+        tabBarIcon: ({ color, size }) => (
+          <Ionicons name="chatbubbles" color={color} size={size} />
+        ),
+        tabBarActiveTintColor: "black",
+        title: "رسائل",
+      }}
+    />
+    <Tab.Screen
+      name="profile"
       component={ProfileStack}
       options={{
         tabBarIcon: ({ color, size }) => (
@@ -39,16 +54,7 @@ const AvocatTabs = () => (
         ),
         tabBarActiveTintColor: "black",
         headerShown: false,
-      }}
-    />
-    <Tab.Screen
-      name="رسائل"
-      component={AvocatMessenger}
-      options={{
-        tabBarIcon: ({ color, size }) => (
-          <Ionicons name="chatbubbles" color={color} size={size} />
-        ),
-        tabBarActiveTintColor: "black",
+        title: "الملف",
       }}
     />
   </Tab.Navigator>

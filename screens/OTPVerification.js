@@ -9,11 +9,39 @@ import {
 } from "react-native";
 import OTPInput from "../components/OTPInput";
 import { SafeAreaView } from "react-native-safe-area-context";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../redux/AuthSlice";
+import { useSelector } from "react-redux";
+
 import CustomButton from "../components/CustomButton";
 
-const OTPVerification = ({ navigation }) => {
-  const handleVerifyOTP = () => {
-    navigation.navigate("Create Profile");
+const OTPVerification = ({ navigation, route }) => {
+  const dispatch = useDispatch(); // Get access to the dispatch function
+  const isSetupProfile = useSelector((state) => state.auth.isProfileSetup);
+  const { role } = route.params;
+  console.log(role);
+  console.log(isSetupProfile);
+
+  const handleVerifyOTP = async () => {
+    const token = Math.random().toString(36).substr(2);
+
+    try {
+      await AsyncStorage.setItem("token", token);
+
+      dispatch(loginSuccess({ token: token }));
+      if (!isSetupProfile) {
+        navigation.navigate("Create Profile");
+      } else {
+        if (role === "user") {
+          navigation.navigate("UserNavigator"); // Navigate to user navigator
+        } else if (role === "avocat") {
+          navigation.navigate("AvocatTabs"); // Navigate to avocat navigator
+        }
+      }
+    } catch (error) {
+      console.error("Error storing token:", error);
+    }
   };
 
   return (
@@ -33,8 +61,8 @@ const OTPVerification = ({ navigation }) => {
 
           <CustomButton
             onPress={handleVerifyOTP}
-            text={"تأكيد"} // Corrected prop name
-            style={[styles.confirmButton, { width: 300 }]} // Added width
+            text={"تأكيد"}
+            style={[styles.confirmButton, { width: 300 }]}
           />
 
           <View style={styles.editPhoneNumberContainer}>

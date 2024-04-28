@@ -2,12 +2,30 @@ import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, View, Text, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
+import { useDispatch } from "react-redux";
+import UserInfo from "../../components/UserInfo";
+import { logout } from "../../redux/AuthSlice";
+import CustomButton from "../../components/CustomButton";
+import ActionButton from "../../components/ActionButton";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { avocats } from "../../components/listAvocats";
 
 function Profile({ navigation }) {
-  // State variables
   const [selectedImage, setSelectedImage] = useState(null);
+  const dispatch = useDispatch();
 
+  const handleLogOut = async () => {
+    try {
+      // Remove the token from AsyncStorage
+      await AsyncStorage.removeItem("token");
+      // Dispatch the logout action
+      dispatch(logout());
+      navigation.navigate("Auth", { screen: "Login" });
+    } catch (error) {
+      console.error("Error logging out:", error);
+      // Handle error
+    }
+  };
   // Function to handle image selection
   const handleImageSelection = async () => {
     const permissionResult =
@@ -58,16 +76,15 @@ function Profile({ navigation }) {
         </View>
 
         {/* User Details */}
-        <UserInfo
-          username="أحمد حامد"
-          phone="24163133"
-          style={styles.userInfo}
-        />
+        <View style={styles.userInfo}>
+          <Text style={styles.username}>أحمد حامد</Text>
+          <Text style={styles.phone}>24163133</Text>
+        </View>
       </View>
 
       {/* Setup Profile Button */}
       <CustomButton
-        onPress={() => navigation.navigate("تعديل الملف الشخصي")}
+        onPress={() => navigation.navigate("EditProfileAvocat")}
         text="تعديل الملف الشخصي"
         style={styles.setupButton}
       />
@@ -75,9 +92,9 @@ function Profile({ navigation }) {
       {/* Bottom Actions */}
       <View style={styles.bottomActions}>
         <ActionButton
+          onPress={handleLogOut}
           iconName="log-out-outline"
           text="تسجيل الخروج"
-          style={styles.action}
         />
         <ActionButton
           iconName="trash-outline"
@@ -114,6 +131,9 @@ const styles = StyleSheet.create({
     width: 100,
     borderRadius: 50,
   },
+  action: {
+    borderBottomWidth: 0,
+  },
   cameraIconContainer: {
     position: "absolute",
     bottom: 0,
@@ -124,6 +144,12 @@ const styles = StyleSheet.create({
   },
   userInfo: {
     flex: 1,
+  },
+  phone: {
+    fontFamily: "Roboto-Black",
+    fontSize: 18,
+    color: "#666",
+    textAlign: "right",
   },
   username: {
     fontSize: 24,
@@ -149,17 +175,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   bottomActions: {
+    position: "absolute",
     backgroundColor: "#fff",
     borderRadius: 10,
-    marginHorizontal: 20,
-    marginVertical: 20,
-    padding: 20,
+    bottom: 8,
+    left: 20, // Adjust left position
+    right: 20, // Adjust right position
   },
-  action: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 10,
-  },
+
   actionText: {
     marginLeft: 10,
     fontSize: 18,

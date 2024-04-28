@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import CustomButton from "../../components/CustomButton";
 import {
   View,
   Text,
@@ -157,21 +157,7 @@ const EditProfile = ({ navigation }) => {
           </View>
         </View>
 
-        <TouchableOpacity
-          style={{
-            height: 44,
-            borderRadius: 6,
-            alignItems: "center",
-            justifyContent: "center",
-            backgroundColor: "#007AFF",
-            marginTop: 20,
-          }}
-          onPress={() => console.log("Save Changes pressed")}
-        >
-          <Text style={{ color: "#FFFFFF", fontWeight: "bold" }}>
-            حفظ التغييرات
-          </Text>
-        </TouchableOpacity>
+        <CustomButton text={" حفظ التغييرات"} />
       </ScrollView>
     </SafeAreaView>
   );

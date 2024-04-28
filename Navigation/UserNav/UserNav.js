@@ -30,13 +30,20 @@ const ProfileStackScreen = () => (
       component={Profile}
       options={{ headerShown: false }}
     />
-    <Stack.Screen name="Edit Profile" component={EditProfile} />
+    <Stack.Screen
+      name="Edit Profile"
+      component={EditProfile}
+      options={{ title: "تعديل الملف الشخصي" }}
+    />
   </Stack.Navigator>
 );
-
 const MessagesStackScreen = () => (
   <Stack.Navigator>
-    <Stack.Screen name="Messages" component={MessagesScreen} />
+    <Stack.Screen
+      name="Messages"
+      component={MessagesScreen}
+      options={{ headerShown: false }}
+    />
     <Stack.Screen name="Chat" component={ChatScreen} />
   </Stack.Navigator>
 );
@@ -52,11 +59,11 @@ const MainNavigator = () => (
         ),
         headerShown: false,
         tabBarActiveTintColor: "black",
-        title: "Home",
+        title: "الصفحة الرئيسية",
       }}
     />
     <Tab.Screen
-      name="Profile"
+      name="ProfileStack"
       component={ProfileStackScreen}
       options={{
         tabBarIcon: ({ color, size }) => (
@@ -64,6 +71,7 @@ const MainNavigator = () => (
         ),
         headerShown: false,
         tabBarActiveTintColor: "black",
+        title: "الملف",
       }}
     />
     <Tab.Screen
@@ -75,7 +83,7 @@ const MainNavigator = () => (
         ),
         headerShown: false,
         tabBarActiveTintColor: "black",
-        title: "Messages",
+        title: "الرسائل",
       }}
     />
   </Tab.Navigator>
