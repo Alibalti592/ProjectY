@@ -20,8 +20,8 @@ const OTPVerification = ({ navigation, route }) => {
   const dispatch = useDispatch();
   const isSetupProfile = useSelector((state) => state.auth.isProfileSetup);
   const { role } = route.params;
-  console.log(role);
-  console.log(isSetupProfile);
+  console.log("otp", role);
+  console.log("otp", isSetupProfile);
 
   const handleVerifyOTP = async () => {
     const token = Math.random().toString(36).substr(2);
@@ -31,7 +31,7 @@ const OTPVerification = ({ navigation, route }) => {
 
       dispatch(loginSuccess({ token: token }));
       if (!isSetupProfile) {
-        navigation.navigate("Auth", { screen: "Create Profile" });
+        navigation.navigate("Create Profile");
       } else {
         if (role === "user") {
           navigation.navigate("UserNavigator"); // Navigate to user navigator

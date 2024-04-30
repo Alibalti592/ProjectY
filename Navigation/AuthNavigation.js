@@ -15,7 +15,7 @@ const AuthNavigator = () => {
     const checkToken = async () => {
       try {
         const setupProfile = await AsyncStorage.getItem("isProfileSetup");
-        setIsSetupProfile(!!setupProfile);
+        setIsSetupProfile(setupProfile);
         console.log("Auth", isSetupProfile);
       } catch (error) {
         console.error("Error checking token:", error);
@@ -37,7 +37,7 @@ const AuthNavigator = () => {
         component={OTPVerification}
         options={{ title: "التحقق من رمز التحقق" }}
       />
-      {!isSetupProfile && (
+      {isSetupProfile && (
         <Stack.Screen
           name="Create Profile"
           component={CreateProfile}

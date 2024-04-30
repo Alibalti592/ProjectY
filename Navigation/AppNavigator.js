@@ -10,15 +10,12 @@ const Stack = createStackNavigator();
 const Root = createStackNavigator();
 const AppNavigator = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isSetupProfile, setIsSetupProfile] = useState(false);
 
   useEffect(() => {
     const checkToken = async () => {
       try {
         const token = await AsyncStorage.getItem("token");
-        const setupProfile = await AsyncStorage.getItem("isProfileSetup");
         setIsLoggedIn(!!token);
-        setIsSetupProfile(!!setupProfile);
       } catch (error) {
         console.error("Error checking token:", error);
       }

@@ -8,7 +8,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import ProfileForm from "../components/ProfileForm";
 
 const CreateProfile = ({ navigation }) => {
-  const [name, setName] = useState("");
+  const [prenom, setPrenom] = useState(""); // Changed state variable name to prenom
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
 
@@ -30,12 +30,12 @@ const CreateProfile = ({ navigation }) => {
         <ProfileForm
           label="الاسم"
           placeholder="ادخل اسمك"
-          value={name}
-          onChangeText={setName}
+          value={prenom} // Changed value and onChangeText props to prenom
+          onChangeText={setPrenom}
         />
         <ProfileForm
-          label="كلمة السر"
-          placeholder="ادخل كلمة السر الخاصة بك"
+          label="prenom" // Changed label to prenom
+          placeholder="ادخل اسمك الأول"
           value={password}
           onChangeText={setPassword}
           secureTextEntry={true}
