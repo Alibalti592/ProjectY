@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "../components/CustomButton";
 import { useDispatch } from "react-redux";
@@ -25,10 +25,8 @@ const CreateProfile = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView
-      style={{ flex: 1, backgroundColor: "#FFFFFF", paddingHorizontal: 22 }}
-    >
-      <View style={{ flexGrow: 1 }}>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.content}>
         <ProfileForm
           label="الاسم"
           placeholder="ادخل اسمك"
@@ -47,5 +45,18 @@ const CreateProfile = ({ navigation }) => {
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#FFFFFF",
+    paddingHorizontal: 22,
+    justifyContent: "center",
+  },
+  content: {
+    flexGrow: 1,
+    justifyContent: "center",
+  },
+});
 
 export default CreateProfile;

@@ -17,7 +17,7 @@ import { useSelector } from "react-redux";
 import CustomButton from "../components/CustomButton";
 
 const OTPVerification = ({ navigation, route }) => {
-  const dispatch = useDispatch(); // Get access to the dispatch function
+  const dispatch = useDispatch();
   const isSetupProfile = useSelector((state) => state.auth.isProfileSetup);
   const { role } = route.params;
   console.log(role);
@@ -31,7 +31,7 @@ const OTPVerification = ({ navigation, route }) => {
 
       dispatch(loginSuccess({ token: token }));
       if (!isSetupProfile) {
-        navigation.navigate("Create Profile");
+        navigation.navigate("Auth", { screen: "Create Profile" });
       } else {
         if (role === "user") {
           navigation.navigate("UserNavigator"); // Navigate to user navigator
