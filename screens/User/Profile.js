@@ -7,7 +7,7 @@ import CustomButton from "../../components/CustomButton";
 import UserInfo from "../../components/UserInfo";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useDispatch } from "react-redux";
-import { signOut, clearUserToken } from "../../redux/AuthSlice";
+import { signOut } from "../../redux/AuthSlice";
 
 function Profile({ navigation }) {
   const dispatch = useDispatch();
@@ -15,15 +15,7 @@ function Profile({ navigation }) {
   const [fontsLoaded] = useFonts({
     "Roboto-Black": require("../../assets/Fonts/Roboto-Black.ttf"),
   });
-  const handleDelete = async () => {
-    try {
-      await AsyncStorage.removeItem("token");
 
-      dispatch(clearUserToken());
-    } catch (error) {
-      console.error("Error deleting user:", error);
-    }
-  };
   const handleLogOut = async () => {
     try {
       await AsyncStorage.removeItem("token");
@@ -47,7 +39,6 @@ function Profile({ navigation }) {
           text="تسجيل الخروج"
         />
         <ActionButton
-          onPress={handleDelete}
           iconName="trash-outline"
           text="حذف الحساب"
           style={styles.action}
