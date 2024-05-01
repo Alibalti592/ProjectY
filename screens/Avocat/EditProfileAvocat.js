@@ -124,7 +124,7 @@ const EditProfile = ({ navigation }) => {
                 onChangeText={(value) => setPassword(value)}
                 editable={true}
                 secureTextEntry={true}
-                style={{ textAlign: "right" }} // Add this line
+                style={{ textAlign: "right" }}
               />
             </View>
           </View>

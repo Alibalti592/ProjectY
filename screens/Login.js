@@ -4,9 +4,11 @@ import UserForm from "./UserForm";
 import { useFonts } from "expo-font";
 import { useState } from "react";
 import { usersAndAvocats } from "../components/util/users"; // Assuming usersAndAvocats array is imported from a separate file
+import { setUser } from "../redux/AuthSlice";
+import { useDispatch } from "react-redux";
 function Login({ navigation }) {
-  const [password, setPassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState(""); // State to hold the phone number value
+  const dispatch = useDispatch();
 
   const [fontsLoaded] = useFonts({
     "Roboto-Black": require("../assets/Fonts/Roboto-Black.ttf"),
@@ -16,10 +18,11 @@ function Login({ navigation }) {
     return null;
   }
   const handleLogin = () => {
-    console.log(phoneNumber);
-    const user = usersAndAvocats.find((item) => item.password === phoneNumber); // Find user or avocat based on the entered password
+    const user = usersAndAvocats.find((item) => item.password === phoneNumber);
     if (phoneNumber) {
-      navigation.navigate("OTP Verification", { role: user?.role }); // Navigate to OTP verification with role information
+      dispatch(setUser(user));
+      console.log("setuser=>", user.role);
+      navigation.navigate("OTP Verification", { user: user });
     } else {
       Alert.alert("please write your phone number");
     }

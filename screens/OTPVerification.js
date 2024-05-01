@@ -11,7 +11,7 @@ import OTPInput from "../components/OTPInput";
 import { SafeAreaView } from "react-native-safe-area-context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useDispatch } from "react-redux";
-import { loginSuccess } from "../redux/AuthSlice";
+import { loginSuccess, setUserToken } from "../redux/AuthSlice";
 import { useSelector } from "react-redux";
 
 import CustomButton from "../components/CustomButton";
@@ -19,28 +19,19 @@ import CustomButton from "../components/CustomButton";
 const OTPVerification = ({ navigation, route }) => {
   const dispatch = useDispatch();
   const isSetupProfile = useSelector((state) => state.auth.isProfileSetup);
-  const { role } = route.params;
-  console.log("otp", role);
-  console.log("otp", isSetupProfile);
 
   const handleVerifyOTP = async () => {
-    const token = Math.random().toString(36).substr(2);
-
     try {
-      await AsyncStorage.setItem("token", token);
+      const token = Math.random().toString(36).substr(2); // Generate a random token
+      await AsyncStorage.setItem("token", token); // Save the token in AsyncStorage
 
-      dispatch(loginSuccess({ token: token }));
       if (!isSetupProfile) {
-        navigation.navigate("Create Profile");
+        navigation.navigate("Create Profile", { token }); // Navigate to Create Profile with the token
       } else {
-        if (role === "user") {
-          navigation.navigate("UserNavigator"); // Navigate to user navigator
-        } else if (role === "avocat") {
-          navigation.navigate("AvocatTabs"); // Navigate to avocat navigator
-        }
+        dispatch(setUserToken(token)); // Dispatch setUserToken with the token
       }
     } catch (error) {
-      console.error("Error storing token:", error);
+      console.error("Error setting token:", error);
     }
   };
 

@@ -9,9 +9,7 @@ const EditProfile = ({ navigation }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSaveChanges = () => {
-    // Logic to save changes
-  };
+  const handleSaveChanges = () => {};
 
   return (
     <SafeAreaView

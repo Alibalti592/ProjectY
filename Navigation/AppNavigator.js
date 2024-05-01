@@ -1,59 +1,43 @@
 import React, { useEffect, useState } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useSelector, useDispatch } from "react-redux";
+import LoadingScreen from "../screens/LoadingScreen";
+import { checkToken } from "../redux/AuthSlice";
 import MainNavigator from "./UserNav/UserNav";
 import AuthNavigator from "./AuthNavigation";
-import AvocatTabs from "../Navigation/AvocatNav/AvocatTabs"; // Import AvocatTabs navigator
+import RootNavigator from "./RootNavigation";
+import AvocatTabs from "../Navigation/AvocatNav/AvocatTabs";
 
 const Stack = createStackNavigator();
-const Root = createStackNavigator();
+
 const AppNavigator = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const token = useSelector((state) => state.auth.token);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const checkToken = async () => {
-      try {
-        const token = await AsyncStorage.getItem("token");
-        setIsLoggedIn(!!token);
-      } catch (error) {
-        console.error("Error checking token:", error);
-      }
+    const getToken = async () => {
+      dispatch(checkToken());
     };
 
-    checkToken();
-  }, []);
+    getToken();
+  }, [dispatch, token]);
 
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {!isLoggedIn ? (
-          <>
-            <Stack.Screen
-              name="Auth"
-              component={AuthNavigator}
-              options={{ headerShown: false }}
-            />
-          </>
+        {token == null ? (
+          <Stack.Screen
+            name="Auth"
+            component={AuthNavigator}
+            options={{ headerShown: false }}
+          />
         ) : (
-          <>
-            <Stack.Screen
-              name="Auth"
-              component={AuthNavigator}
-              options={{ headerShown: false }}
-            />
-
-            <Stack.Screen
-              name="UserNavigator"
-              component={MainNavigator}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="AvocatTabs"
-              component={AvocatTabs}
-              options={{ headerShown: false }}
-            />
-          </>
+          <Stack.Screen
+            name="Root"
+            component={RootNavigator}
+            options={{ headerShown: false }}
+          />
         )}
       </Stack.Navigator>
     </NavigationContainer>

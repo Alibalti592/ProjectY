@@ -29,7 +29,7 @@ const ChatScreen = ({ navigation, route }) => {
     const newMessage = {
       id: messages.length + 1,
       text: inputMessage,
-      sender: "user", // Assuming user is sending the message
+      sender: "user",
     };
 
     setMessages([...messages, newMessage]);

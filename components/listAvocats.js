@@ -19,7 +19,7 @@ export const avocats = [
     address: "شارع النهضة، البناية رقم 5",
     phoneNumber: "57123456",
     latitude: 36.7372,
-    longitude: 3.0819, // Specified longitude
+    longitude: 3.0819,
     userImg: require("../assets/users/user-1.jpg"),
     messageTime: "2 hours ago",
     messageText:
@@ -32,7 +32,7 @@ export const avocats = [
     address: "شارع الجمهورية، الطابق الثالث",
     phoneNumber: "59654321",
     latitude: 36.7372,
-    longitude: 3.089, // Specified longitude
+    longitude: 3.089,
     userImg: require("../assets/users/user-4.jpg"),
     messageTime: "1 hours ago",
     messageText:

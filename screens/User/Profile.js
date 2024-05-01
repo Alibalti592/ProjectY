@@ -7,21 +7,19 @@ import CustomButton from "../../components/CustomButton";
 import UserInfo from "../../components/UserInfo";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useDispatch } from "react-redux";
-import { deleteUser } from "../../redux/AuthSlice";
-import { logout } from "../../redux/AuthSlice";
+import { signOut, clearUserToken } from "../../redux/AuthSlice";
 
 function Profile({ navigation }) {
   const dispatch = useDispatch();
+
   const [fontsLoaded] = useFonts({
     "Roboto-Black": require("../../assets/Fonts/Roboto-Black.ttf"),
   });
   const handleDelete = async () => {
     try {
       await AsyncStorage.removeItem("token");
-      await AsyncStorage.removeItem("isProfileSetup");
 
-      dispatch(deleteUser());
-      navigation.navigate("Auth", { screen: "Login" });
+      dispatch(clearUserToken());
     } catch (error) {
       console.error("Error deleting user:", error);
     }
@@ -29,8 +27,7 @@ function Profile({ navigation }) {
   const handleLogOut = async () => {
     try {
       await AsyncStorage.removeItem("token");
-      dispatch(logout());
-      navigation.navigate("Auth", { screen: "Login" });
+      dispatch(signOut());
     } catch (error) {
       console.error("Error logging out:", error);
     }
@@ -108,8 +105,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 10,
     bottom: 8,
-    left: 20, // Adjust left position
-    right: 20, // Adjust right position
+    left: 20,
+    right: 20,
   },
   action: {
     borderBottomWidth: 0,

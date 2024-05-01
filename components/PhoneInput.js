@@ -25,7 +25,13 @@ const PhoneInput = ({ phoneNumber, setPhoneNumber }) => {
 
   return (
     <View style={{ width: "100%" }}>
-      <View style={{ flexDirection: "row", backgroundColor: "#F5F5F5" }}>
+      <View
+        style={{
+          flexDirection: "row",
+          backgroundColor: "#F5F5F5",
+          width: "100%",
+        }}
+      >
         <TouchableOpacity
           style={{
             backgroundColor: "#D9D9D9",
@@ -62,12 +68,15 @@ const PhoneInput = ({ phoneNumber, setPhoneNumber }) => {
           value={phoneNumber}
           onChangeText={setPhoneNumber}
           style={{
+            flex: 1,
+            textAlign: "left",
+            paddingHorizontal: 8,
             marginVertical: 10,
             height: 40,
             fontSize: 20,
             color: "#111",
           }}
-          placeholder={isFocused ? "" : "رقم الهاتف"} // Only show placeholder if not focused
+          placeholder={isFocused ? "" : "رقم الهاتف"}
           placeholderTextColor="#111"
           selectionColor="#111"
           keyboardType="numeric"

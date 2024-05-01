@@ -3,25 +3,24 @@ import { View, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "../components/CustomButton";
 import { useDispatch } from "react-redux";
-import { setProfileSetup } from "../redux/AuthSlice";
+import { setProfileSetup, setUserToken } from "../redux/AuthSlice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ProfileForm from "../components/ProfileForm";
 
-const CreateProfile = ({ navigation }) => {
-  const [prenom, setPrenom] = useState(""); // Changed state variable name to prenom
-  const [password, setPassword] = useState("");
-  const dispatch = useDispatch();
+const CreateProfile = ({ route }) => {
+  const [prenom, setPrenom] = useState("");
+  const [nom, setNom] = useState("");
+  const { token } = route.params;
 
+  const dispatch = useDispatch();
   const handleProfileSetup = async () => {
-    // Dispatch action to set isProfileSetup to true
     dispatch(setProfileSetup());
     try {
-      // Store isProfileSetup status in AsyncStorage
       await AsyncStorage.setItem("isProfileSetup", "true");
+      dispatch(setUserToken(token));
     } catch (error) {
       console.error("Error storing isProfileSetup:", error);
     }
-    navigation.navigate("UserNavigator");
   };
 
   return (
@@ -29,15 +28,15 @@ const CreateProfile = ({ navigation }) => {
       <View style={styles.content}>
         <ProfileForm
           label="الاسم"
-          placeholder="ادخل اسمك"
-          value={prenom} // Changed value and onChangeText props to prenom
+          placeholder=" اسمك"
+          value={prenom}
           onChangeText={setPrenom}
         />
         <ProfileForm
-          label="prenom" // Changed label to prenom
-          placeholder="ادخل اسمك الأول"
-          value={password}
-          onChangeText={setPassword}
+          label="اللقب"
+          placeholder="اللقب"
+          value={nom}
+          onChangeText={setNom}
           secureTextEntry={true}
         />
         <CustomButton text="حفظ التغييرات" onPress={handleProfileSetup} />

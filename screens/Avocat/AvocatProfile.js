@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { useDispatch } from "react-redux";
 import UserInfo from "../../components/UserInfo";
-import { logout } from "../../redux/AuthSlice";
+import { signOut } from "../../redux/AuthSlice";
 import CustomButton from "../../components/CustomButton";
 import ActionButton from "../../components/ActionButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -16,17 +16,12 @@ function Profile({ navigation }) {
 
   const handleLogOut = async () => {
     try {
-      // Remove the token from AsyncStorage
       await AsyncStorage.removeItem("token");
-      // Dispatch the logout action
-      dispatch(logout());
-      navigation.navigate("Auth", { screen: "Login" });
+      dispatch(signOut());
     } catch (error) {
       console.error("Error logging out:", error);
-      // Handle error
     }
   };
-  // Function to handle image selection
   const handleImageSelection = async () => {
     const permissionResult =
       await ImagePicker.requestMediaLibraryPermissionsAsync();

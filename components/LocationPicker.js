@@ -43,13 +43,12 @@ export default function useLocationPicker({ navigation }) {
       });
     } catch (error) {
       console.error("Error getting location:", error);
-      // Handle error, maybe show an alert to the user
     }
   }
 
   useEffect(() => {
     getLocationHandler();
-  }, []); // Make sure to provide an empty dependency array to useEffect
+  }, []);
 
   return userLocation;
 }

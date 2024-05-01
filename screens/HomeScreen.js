@@ -15,8 +15,8 @@ function HomeScreen({ navigation }) {
   const [region, setRegion] = useState({
     latitude: 36.7372,
     longitude: 3.0877,
-    latitudeDelta: 0.009, // Zoom level
-    longitudeDelta: 0.009, // Zoom level
+    latitudeDelta: 0.009,
+    longitudeDelta: 0.009,
   });
 
   const callOutHandler = (avocat) => {

@@ -13,9 +13,9 @@ const AddressComponent = ({ address }) => {
 const styles = StyleSheet.create({
   addressContainer: {
     position: "absolute",
-    top: 20, // Keep it at the top
+    top: 20,
     left: 20,
-    right: 20, // Add margin to the right
+    right: 20,
     backgroundColor: "#FFFFFF",
     padding: 10,
     borderRadius: 10,

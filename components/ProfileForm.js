@@ -10,7 +10,7 @@ const ProfileForm = ({
 }) => {
   return (
     <View style={{ flexDirection: "column", marginBottom: 6 }}>
-      <Text>{label}</Text>
+      <Text style={{ padding: 8 }}>{label}</Text>
       <View
         style={{
           height: 44,
@@ -23,6 +23,7 @@ const ProfileForm = ({
         }}
       >
         <TextInput
+          style={{ padding: 8 }}
           placeholder={placeholder}
           value={value}
           onChangeText={onChangeText}
