@@ -3,7 +3,6 @@ import { StyleSheet, TouchableOpacity, View, Text, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { useDispatch } from "react-redux";
-import UserInfo from "../../components/UserInfo";
 import { signOut } from "../../redux/AuthSlice";
 import CustomButton from "../../components/CustomButton";
 import ActionButton from "../../components/ActionButton";
